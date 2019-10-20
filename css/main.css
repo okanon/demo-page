@@ -186,8 +186,12 @@ a:active, a:hover:active {
   font-weight: 600
 }
 
-.brand-colours.twitter {
+.brand-c.brand-colours.twitter {
   color: #5da8dc !important
+}
+
+.brand-colours.github {
+  color: #000 !important
 }
 
 .brand-colours.reddit {
