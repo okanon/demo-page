@@ -3,17 +3,6 @@
   text-align: center
 }
 
-.home h2 {
-  font-size: 60px;
-  color: #111;
-  text-align: center;
-  margin-bottom: 25px
-}
-
-.home h3 {
-  font-size: 25px
-}
-
 .home p {
   font-size: 25px;
   line-height: 1.5
@@ -63,19 +52,6 @@
   transition: 250ms ease-out transform, 250ms ease-out opacity;
   font-size: 15px;
   line-height: 1.1
-}
-
-.home .jumbotron .btn:hover {
-  opacity: 0.8
-}
-
-.home .jumbotron .btn:active {
-  transform: scale(0.9)
-}
-
-.home .jumbotron .btn small {
-  font-size: 10px;
-  font-weight: 600
 }
 
 .home .section {
