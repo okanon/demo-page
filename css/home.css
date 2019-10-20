@@ -3,11 +3,6 @@
   text-align: center
 }
 
-.home p {
-  font-size: 25px;
-  line-height: 1.5
-}
-
 .home .section {
   display: flex;
   flex-direction: column;
@@ -38,20 +33,6 @@
   .home .section {
     padding: 40px
   }
-}
-
-@media (max-width: 420px) {
-  .home .section p {
-    font-size: 16px;
-    line-height: 1.5
-  }
-  .home .section p.caption {
-    font-size: 14px
-  }
-}
-
-.home .section>div>h2 {
-  font-weight: 700
 }
 
 @media (max-width: 420px) {
@@ -103,15 +84,6 @@
   opacity: 0.7
 }
 
-.home .section#team .members>div h3 {
-  margin: 0;
-  font-weight: 600;
-  color: #000
-}
-
-.home .section#team .members>div p {
-  font-size: 20px;
-  margin-top: 0
 }
 
 .home .section#team .members>div .social-icon {
