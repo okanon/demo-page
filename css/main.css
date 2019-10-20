@@ -7,14 +7,10 @@
   }
 }
 
-.brand-c.brand-colours.twitter {
+.tw-color {
   color: #5da8dc !important
 }
 
-.brand-colours.github {
+.git-color {
   color: #000 !important
-}
-
-.brand-colours.reddit {
-  color: #ff4500 !important
 }
