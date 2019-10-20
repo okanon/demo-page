@@ -40,15 +40,6 @@
   }
 }
 
-.home .section p {
-  color: #777;
-  font-size: 22px
-}
-
-.home .section p.caption {
-  font-size: 20px
-}
-
 @media (max-width: 420px) {
   .home .section p {
     font-size: 16px;
@@ -145,72 +136,5 @@
   }
   .home .section#team .members>div p {
     font-size: 16px
-  }
-}
-
-.home .section#support .methods {
-  display: flex;
-  flex-direction: row;
-  margin-top: 50px
-}
-
-.home .section#support .methods>a {
-  position: relative;
-  margin: 30px
-}
-
-.home .section#support .methods>a>div {
-  min-width: 240px;
-  min-height: 180px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  border-radius: 10px;
-  background-color: white;
-  padding: 40px;
-  font-weight: 500;
-  text-align: center;
-  transition: 250ms ease-out transform, 250ms ease-out opacity
-}
-
-.home .section#support .methods>a>div:hover {
-  opacity: 0.7
-}
-
-.home .section#support .methods>a>div:active {
-  opacity: 0.5;
-  transform: scale(0.95)
-}
-
-.home .section#support .methods>a>div i {
-  font-size: 50px;
-  margin-bottom: 20px
-}
-
-.home .section#support .methods>a>div p {
-  color: #333;
-  margin-bottom: 0
-}
-
-.home .section#support .methods>a>div p.caption {
-  color: #a3a3a3;
-  margin: 0;
-  font-weight: 400
-}
-
-@media (max-width: 540px) {
-  .home .section#support .methods {
-    margin-top: 0;
-    flex-direction: column;
-    align-items: center;
-    max-width: 400px
-  }
-  .home .section#support .methods>a {
-    margin-top: 20px;
-    margin-bottom: 10px
-  }
-  .home .section#support .methods>a>div {
-    min-height: auto
   }
 }
