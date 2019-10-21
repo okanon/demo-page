@@ -1,16 +1,78 @@
 
-@supports (backdrop-filter: none) or (-webkit-backdrop-filter: none) {
-  .header.scrolls.scrolled {
-    background: rgba(44, 177, 190, 0.9);
-    -webkit-backdrop-filter: blur(10px) saturate(3);
-    backdrop-filter: blur(10px) saturate(3)
-  }
+@font-face {
+    font-family: "kozL";
+    src: url(KozGoPr6N-Light.otf);
 }
 
-.tw-color {
-  color: #5da8dc !important
+body {
+    background: linear-gradient(0deg, rgb(214, 198, 175), rgb(253, 246, 227));
+    color: #839496;
+    font-family: 'Open Sans', Meiryo, sans-serif;
+    padding-top: 100px !important;
+    max-width: 980px;
+    margin-right: auto;
+    margin-left: auto;
+    display: block;
+    text-align: center !important;
+    display: none;
 }
 
-.git-color {
-  color: #000 !important
+.ellipse-btn {
+    color: white;
+    text-decoration: none;
+    background: #839496;
+    box-shadow: 0px 0px 20px #839496;
+    padding-top: 6px !important;
+    padding-right: 42px !important;
+    padding-left: 42px !important;
+    padding-bottom: 6px !important;
+    border-radius: 100px;
+    font-weight: bold;
+}
+
+.credits-top {
+    font-size: 0.80em;
+    padding-right: 10px;
+    padding-left: 10px;
+    color: rgba(131, 148 150, 0.5);
+}
+
+.dotted-list {
+    display: inline-block;
+    padding: 30px;
+    padding-left: 50px;
+    padding-top: 5px !important;
+    text-align: left;
+    opacity: 0.9;
+    list-style-type: circle;
+    font-size: 0.85em;
+}
+
+.warning-message {
+    font-size: 0.7em;
+    color: rgba(131, 148, 150, 0.8);
+}
+
+.line-link {
+    color: rgba(0, 43, 54, 0.5);
+    text-decoration: underline;
+}
+
+.logo_size {
+    width: 40%;
+}
+
+@media only screen and (max-device-width: 480px) {
+    .logo_size {
+        width: 50%;
+    }
+}
+
+.description {
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+    font-size: 14px;
+    text-indent: 1em;
 }
