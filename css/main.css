@@ -76,3 +76,18 @@ body {
     font-size: 14px;
     text-indent: 1em;
 }
+
+.tw-color {
+    color: #5da8dc !important;
+    }
+
+.git-color {
+    color: #000 !important;
+}
+    
+.flex {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 70px;
+}
