@@ -5,6 +5,8 @@
 }
 
 body {
+    background: -moz-linear-gradient(0deg, rgb(214, 198, 175), rgb(253, 246, 227));
+    background: -webkit-linear-gradient(0deg, rgb(214, 198, 175), rgb(253, 246, 227));
     background: linear-gradient(0deg, rgb(214, 198, 175), rgb(253, 246, 227));
     color: #839496;
     font-family: 'Open Sans', Meiryo, sans-serif;
