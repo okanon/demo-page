@@ -17,7 +17,7 @@ body {
     display: block;
     text-align: center !important;
     display: none;
-    min-height: 100% !important;
+    min-height: 10vh;
 }
 
 .ellipse-btn {
