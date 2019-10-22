@@ -48,6 +48,19 @@
 }</code>
             </pre>
         </div>
+        
+        <p class="description">アプリケーションサーバから取得した場合はThriftのデータ形式で値が返るが、ここではLINEサーバへhttpリクエストしたのを前提に後の処理を行う。</p>
+        <p class="description">リクエストの返り値はjson形式であり、session_keyとrsa_keyの2つのデータに分かれる。rsa_keyはコンマで区切られているため、splitして使用する。<br>
+        ここでは順に、keyname、nvalue、evalueとする。</p>
+        <p class="description">session_keyはidとパスワードと一緒に使用し、各値の文字数に対応するアスキーコードを各値の先頭に配置して3つの値を連結し、メッセージを生成する。以下は直感的にわかりやすいpythonコードで記述したものである。</p>
+        
+        <div style="padding-top: 5px">
+            <pre class="language-x hljs">
+                <code class="language-X hljs" data-language="python">message  = (chr(len(session_key)) + session_key + 
+            chr(len(id)) + id + 
+            chr(len(password)) + password).encode('utf-8')</code>
+            </pre>
+        </div>
     </div>
     
     <footer>
