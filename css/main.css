@@ -9,8 +9,6 @@ html {
 }
 
 body {
-    background: -moz-linear-gradient(45deg, rgb(214, 198, 175), rgb(253, 246, 227));
-    background: -webkit-linear-gradient(45deg, rgb(214, 198, 175), rgb(253, 246, 227));
     background: linear-gradient(45deg, rgb(214, 198, 175), rgb(253, 246, 227));
     background-repeat: no-repeat;
     color: #839496;
