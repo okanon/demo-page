@@ -1,6 +1,4 @@
 body {
-    background: -moz-linear-gradient(0deg, rgb(190, 198, 205), rgb(230, 235, 237));
-    background: -webkit-linear-gradient(0deg, rgb(190, 198, 205), rgb(230, 235, 237));
     background: linear-gradient(0deg, rgb(190, 198, 205), rgb(230, 235, 237));
     background-repeat: no-repeat;
     color: #839496;
