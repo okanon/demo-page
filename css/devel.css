@@ -1,7 +1,7 @@
 body {
-    background: -moz-linear-gradient(0deg, rgb(214, 198, 175), rgb(253, 246, 227));
-    background: -webkit-linear-gradient(0deg, rgb(214, 198, 175), rgb(253, 246, 227));
-    background: linear-gradient(0deg, rgb(214, 198, 175), rgb(253, 246, 227));
+    background: -moz-linear-gradient(0deg, rgb(230, 235, 237), rgb(200, 208, 215));
+    background: -webkit-linear-gradient(0deg, rgb(230, 235, 237), rgb(200, 208, 215));
+    background: linear-gradient(0deg, rgb(230, 235, 237), rgb(200, 208, 215));
     background-repeat: no-repeat;
     color: #839496;
     font-family: 'Open Sans', Meiryo, sans-serif;
