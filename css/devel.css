@@ -9,3 +9,56 @@ body {
     margin-left: auto;
     text-align: center !important;
 }
+
+pre.language-C {
+    background-color: #eee;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    color: #000;
+    content: attr(data-language);
+    display: inline-block;
+    font-size: 1em;
+    left: 0;
+    padding: 0 .5em;
+    position: relative;
+    text-shadow: none;
+    top: 0;
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 600px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+pre code {
+    display: block;
+    overflow-x: auto;
+    padding: 32px 16px;
+    color: #333;
+    background: #f8f8f8;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    font-size: 12px;
+    margin: 0;
+    font-family: Monaco, Consolas, 'Courier New', Courier, monospace;
+}
+
+.C-markdownContents pre[class*=language-]>code[data-language]:before, .p-markdownHelpContentItem__preview pre[class*=language-]>code[data-language]:before, .question-preview pre[class*=language-]>code[data-language]:before {
+    background-color: #eee;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    color: #000;
+    content: attr(data-language);
+    display: inline-block;
+    font-size: 1em;
+    left: 0;
+    padding: 0 .5em;
+    position: absolute;
+    text-shadow: none;
+    top: 0;
+    max-width: 80%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
