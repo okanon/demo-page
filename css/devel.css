@@ -10,7 +10,7 @@ body {
     text-align: center !important;
 }
 
-pre.language-C {
+pre.language {
     background-color: #eee;
     border: 1px solid #ddd;
     border-radius: 3px;
@@ -44,7 +44,7 @@ pre code {
     font-family: Monaco, Consolas, 'Courier New', Courier, monospace;
 }
 
-.C-markdownContents pre[class*=language-]>code[data-language]:before, .p-markdownHelpContentItem__preview pre[class*=language-]>code[data-language]:before, .question-preview pre[class*=language-]>code[data-language]:before {
+pre[class*=language-]>code[data-language]:before, .p-markdownHelpContentItem__preview pre[class*=language-]>code[data-language]:before, .question-preview pre[class*=language-]>code[data-language]:before {
     background-color: #eee;
     border: 1px solid #ddd;
     border-radius: 3px;
