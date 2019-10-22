@@ -15,6 +15,7 @@ body {
     display: block;
     text-align: center !important;
     display: none;
+    height: 100%;
 }
 
 .ellipse-btn {
