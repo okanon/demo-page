@@ -19,7 +19,6 @@ pre.language-x {
     display: inline-block;
     font-size: 1em;
     left: 0;
-    padding: 0 .5em;
     position: relative;
     text-shadow: none;
     top: 0;
@@ -53,7 +52,7 @@ pre[class*=language-]>code[data-language]:before, .p-markdownHelpContentItem__pr
     display: inline-block;
     font-size: 1em;
     left: 0;
-    padding: 0 .5em;
+    padding: .2em .5em;
     position: absolute;
     text-shadow: none;
     top: 0;
