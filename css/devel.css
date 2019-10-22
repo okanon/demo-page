@@ -34,7 +34,7 @@ pre.language-x {
 pre code {
     display: block;
     overflow-x: auto;
-    padding: 32px 16px;
+    padding: 32px 16px 16px 16px;
     color: #596263;
     background: #fdf6e3;
     border: 1px solid #ddd;
