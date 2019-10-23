@@ -31,29 +31,6 @@ pre.language-x {
     text-overflow: ellipsis;
 }
 
-@media only screen and (max-device-width: 480px) {
-    pre.language-x {
-        background-color: #eee;
-        border: 1px solid #ddd;
-        border-radius: 3px;
-        color: #596263;
-        content: attr(data-language);
-        display: inline-block;
-        font-size: 1em;
-        left: 0;
-        position: relative;
-        text-shadow: none;
-        top: 0;
-        margin-right: auto;
-        margin-left: auto;
-        min-width: 300px;
-        max-width: 100%;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
-}
-
 pre code {
     display: block;
     overflow-x: auto;
@@ -86,4 +63,28 @@ pre[class*=language-]>code[data-language]:before, .p-markdownHelpContentItem__pr
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+@media only screen and (max-device-width: 480px) {
+    
+    pre.language-x {
+        background-color: #eee;
+        border: 1px solid #ddd;
+        border-radius: 3px;
+        color: #596263;
+        content: attr(data-language);
+        display: inline-block;
+        font-size: 1em;
+        left: 0;
+        position: relative;
+        text-shadow: none;
+        top: 0;
+        margin-right: auto;
+        margin-left: auto;
+        min-width: 300px;
+        max-width: 100%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
 }
