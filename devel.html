@@ -34,7 +34,7 @@
         </ol>
         <p class="description">LINEサーバへのログイン方法には上記の4つが存在する。以下のセクションでは、各ログイン方法について解説していく。</p>
         
-        <h4 style="padding-top: 5px;">ID &amp; Password</h4>
+        <h3 style="padding-top: 5px;">ID &amp; Password</h3>
         <p class="description">
             ここでは、idとパスワード、そしてRSA暗号化に必要なデータを、LINEアプリケーションサーバないしはLINEサーバから取得し、それらを使用して暗号キーを生成する。
             取得されたデータは以下の形式である。<span style="font-size: 11px;"> &ast;LINEアカウントにメールアドレスが紐付けられていることを前提とする</span>
@@ -61,6 +61,34 @@
             chr(len(password)) + password).encode('utf-8')</code>
             </pre>
         </div>
+        
+        <p class="description">nvalueとevalueは16進数形式のため10進数に変換し、PublicKeyを作成。作成したPublicKeyを使用してメッセージを暗号化する。
+            生成された暗号キーは16進数のデータに変換して使用する。ここではcryptoとする。</p>
+        <p class="dscription">暗号キーが生成できたら、それを使用してログインを行う。ここで必要になるのは、</p>
+        
+        <ol class="dotted-list" style="padding-bottom: 10px;">
+            <li>ログインタイプ</li>
+            <li>プロバイダ</li>
+            <li>識別子</li>
+            <li>パスワード</li>
+            <li>IPアドレス</li>
+            <li>ログイン証明（string型のみ）</li>
+            <li>e2eeVersion（Letter Sealing）</li>
+            <li>システム名</li>
+        </ol>
+        
+        <h4>LoginType</h4>
+        <p class="description">ログインタイプを指定する。値はline.thriftを用いてThriftのジェネレータで自動生成されたソースコードにEnumデータが存在するためそのデータを使用する。</p>
+        <div style="padding-top: 5px">
+            <pre class="language-x hljs">
+                <code class="language-X hljs" data-language="thrift">enum LoginType {
+   ID_CREDENTIAL = 0,
+   QRCODE = 1,
+   ID_CREDENTIAL_WITH_E2EE = 2,
+}</code>
+            </pre>
+        </div>
+        
     </div>
     
     <footer>
