@@ -66,6 +66,14 @@ pre[class*=language-]>code[data-language]:before, .p-markdownHelpContentItem__pr
 }
 
 @media only screen and (max-device-width: 480px) {
+    p .description {
+        max-width: 400px;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: left;
+        font-size: 13px;
+        text-indent: 1em;
+    }
     
     pre.language-x {
         background-color: #eee;
