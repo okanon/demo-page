@@ -117,4 +117,24 @@ pre[class*=language-]>code[data-language]:before, .p-markdownHelpContentItem__pr
         font-size: 12px;
         text-indent: 1em;
     }
+    
+    pre.language-x {
+        background-color: #eee;
+        border: 1px solid #ddd;
+        border-radius: 3px;
+        color: #596263;
+        content: attr(data-language);
+        display: inline-block;
+        font-size: 1em;
+        left: 0;
+        position: relative;
+        text-shadow: none;
+        top: 0;
+        margin-right: auto;
+        margin-left: auto;
+        width: 300px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
 }
