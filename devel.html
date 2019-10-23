@@ -82,7 +82,7 @@
             値はline.thriftを用いてThriftのジェネレータで自動生成されたソースコードにEnumデータが存在するためそのデータを使用する。</p>
         <div style="padding-top: 5px">
             <pre class="language-x hljs">
-                <code class="language-X hljs" data-language="thrift">enum LoginType {
+                <code class="language-X hljs" data-language="thrift"><span style="color: #2aa198">enum</span> LoginType {
    ID_CREDENTIAL = 0,
    QRCODE = 1,
    ID_CREDENTIAL_WITH_E2EE = 2,
@@ -95,7 +95,7 @@
             値はline.thriftを用いてThriftのジェネレータで自動生成されたソースコードにEnumデータが存在するためそのデータを使用する。</p>
         <div style="padding-top: 5px">
             <pre class="language-x hljs">
-                <code class="language-X hljs" data-language="thrift">enum IdentityProvider {
+                <code class="language-X hljs" data-language="thrift"><span style="color: #2aa198">enum</span> IdentityProvider {
    UNKNOWN = 0,
    LINE = 1,
    NAVER_KR = 2,
@@ -127,6 +127,53 @@
         <p class="description">この項目は任意の文字列を指定する。
             これはLINEへのログインが成功した際のLINE公式アカウントからのログインメッセージにあるログインした端末の名前、更にログイン中の端末の項目に利用される。</p>
         
+        <br>
+        <p class="description">では、これらのデータを使用して実際にログインを行なっていく。</p>
+        <div style="padding-top: 5px">
+            <pre class="language-x hljs">
+                <code class="language-X hljs" data-language="thrift">thrift_ptr<TalkServiceClient> conn(this->host, 443, TALKSERVICE, {{"User-Agent", this->useragent}, {"X-Line-Application", this->application}});
+
+RSAKey key;
+conn->getRSAKeyInfo(key, IdentityProvider::LINE);
+
+auto t = encrypt::rsa(key, mail, password);
+
+thrift_ptr<AuthServiceClient> aconn(this->host, 443, AUTH, {{"User-Agent", this->useragent}, {"X-Line-Application", this->application}});
+
+LoginRequest request;
+LoginResult result;
+
+request.type = LoginType::ID_CREDENTIAL;
+request.identityProvider = IdentityProvider::LINE;
+request.identifier = t.first;
+request.password = t.second;
+request.accessLocation = "127.0.0.1";
+request.certificate = certificate;
+request.e2eeVersion = 0;
+request.systemName = this->systemname;
+
+try {
+	aconn->loginZ(result, request);
+}
+catch (AuthException &e) {
+	std::cerr << e << std::endl;
+}
+
+if (result.type == LoginResultType::REQUIRE_DEVICE_CONFIRM) {
+	std::cout << "Enter \"" << result.pinCode << "\" on your smartphone :)" << std::endl;
+			
+	return q(result.verifier);
+}
+else if (result.type == LoginResultType::SUCCESS) {
+	this->authToken = result.authToken;
+	this->certificate = result.certificate;
+
+	ready();
+	return true;
+}</code>
+            </pre>
+        </div>
+        
     </div>
     
     <footer>
@@ -137,3 +184,4 @@
     </footer>
 </body>
 </html>
+
