@@ -136,7 +136,7 @@
 <span style="color: #2aa198">RSAKey</span> key;
 conn->getRSAKeyInfo(key, IdentityProvider::<span style="color: #2aa198">LINE</span>);
 
-<span style="color: #6c71c4">auto</span> t = encrypt::<span style="color: #2aa198">rsa</span>(key, mail, password);
+<span style="color: #268bd2">auto</span> t = encrypt::<span style="color: #2aa198">rsa</span>(key, mail, password);
 
 thrift_ptr<<span style="color: #2aa198">AuthServiceClient</span>> aconn(<span style="color: #b58900">this</span>->host, 443, <span style="color: #d33682">AUTH</span>, {{<span style="color: #dc322f">"User-Agent"</span>, <span style="color: #b58900">this</span>->useragent}, {<span style="color: #dc322f">"X-Line-Application"</span>, <span style="color: #b58900">this</span>->application}});
 
@@ -152,24 +152,24 @@ request.certificate = certificate;
 request.e2eeVersion = <span style="color: #859900">0</span>;
 request.systemName = <span style="color: #b58900">this</span>->systemname;
 
-<span style="color: #6c71c4">try</span> {
+<span style="color: #268bd2">try</span> {
    	aconn->loginZ(result, request);
 }
-<span style="color: #6c71c4">catch</span> (<span style="color: #2aa198">AuthException</span> &e) {
+<span style="color: #268bd2">catch</span> (<span style="color: #2aa198">AuthException</span> &e) {
     std::cerr << e << std::endl;
 }
 
-<span style="color: #6c71c4">if</span> (result.type == LoginResultType::<span style="color: #2aa198">REQUIRE_DEVICE_CONFIRM</span>) {
+<span style="color: #268bd2">if</span> (result.type == LoginResultType::<span style="color: #2aa198">REQUIRE_DEVICE_CONFIRM</span>) {
     std::cout << <span style="color: #dc322f">"Enter \""</span> << result.pinCode << <span style="color: #dc322f">"\" on your smartphone :)"</span> << std::endl;
 			
-    <span style="color: #6c71c4">return</span> q(result.verifier);
+    <span style="color: #268bd2">return</span> q(result.verifier);
 }
-<span style="color: #6c71c4">else if</span> (result.type == LoginResultType::<span style="color: #2aa198">SUCCESS</span>) {
+<span style="color: #268bd2">else if</span> (result.type == LoginResultType::<span style="color: #2aa198">SUCCESS</span>) {
     <span style="color: #b58900">this</span>->authToken = result.authToken;
     <span style="color: #b58900">this</span>->certificate = result.certificate;
 
     ready();
-    <span style="color: #6c71c4">return</span> true;
+    <span style="color: #268bd2">return</span> true;
 }</code>
             </pre>
         </div>
@@ -194,25 +194,25 @@ request.systemName = <span style="color: #b58900">this</span>->systemname;
 }
 
 <span style="color: #2aa198">struct</span> VerificationSessionData {
-    1: <span style="color: #6c71c4">string</span> sessionId;
-    2: <span style="color: #268bd2">VerificationMethod</span> method;
-    3: <span style="color: #6c71c4">string</span> callback;
-    4: <span style="color: #6c71c4">string</span> normalizedPhone;
-    5: <span style="color: #6c71c4">string</span> countryCode;
-    6: <span style="color: #6c71c4">string</span> nationalSignificantNumber;
-    7: <span style="color: #6c71c4">list</span><<span style="color: #268bd2">VerificationMethod</span>> availableVerificationMethods;
-    8: <span style="color: #6c71c4">string</span> callerIdMask;
+    1: <span style="color: #268bd2">string</span> sessionId;
+    2: <span style="color: #6c71c4">VerificationMethod</span> method;
+    3: <span style="color: #268bd2">string</span> callback;
+    4: <span style="color: #268bd2">string</span> normalizedPhone;
+    5: <span style="color: #268bd2">string</span> countryCode;
+    6: <span style="color: #268bd2">string</span> nationalSignificantNumber;
+    7: <span style="color: #268bd2">list</span><<span style="color: #6c71c4">VerificationMethod</span>> availableVerificationMethods;
+    8: <span style="color: #268bd2">string</span> callerIdMask;
 }
 
 <span style="color: #2aa198">struct</span> LoginResult {
-    1: <span style="color: #6c71c4">string</span> authToken;
-    2: <span style="color: #6c71c4">string</span> certificate;
-    3: <span style="color: #6c71c4">string</span> verifier;
-    4: <span style="color: #6c71c4">string</span> pinCode;
-    5: <span style="color: #268bd2">LoginResultType</span> type;
-    6: <span style="color: #6c71c4">i64</span> lastPrimaryBindTime;
-    7: <span style="color: #6c71c4">string</span> displayMessage;
-    8: VerificationSessionData sessionForSMSConfirm;
+    1: <span style="color: #268bd2">string</span> authToken;
+    2: <span style="color: #268bd2">string</span> certificate;
+    3: <span style="color: #268bd2">string</span> verifier;
+    4: <span style="color: #268bd2">string</span> pinCode;
+    5: <span style="color: #6c71c4">LoginResultType</span> type;
+    6: <span style="color: #268bd2">i64</span> lastPrimaryBindTime;
+    7: <span style="color: #268bd2">string</span> displayMessage;
+    8: <span style="color: #6c71c4">VerificationSessionData</span> sessionForSMSConfirm;
 }</code>
             </pre>
         </div>
