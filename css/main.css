@@ -84,7 +84,7 @@ body {
     }
 }
 
-.description {
+p .description {
     max-width: 600px;
     margin-left: auto;
     margin-right: auto;
