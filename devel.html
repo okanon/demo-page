@@ -5,27 +5,23 @@
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta content="ja" http-equiv="content-language">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport">
-
     <title>LineInc</title>
     <meta content="LineInc" property="og:title">
     <meta content="ja_JP" property="og:locale">
     <meta content="LineBot" name="description">
     <meta content="LineBot" property="og:description">
-
     <link href="css/main.css" rel="stylesheet">
     <link href="css/credits.css" rel="stylesheet">
     <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
     <link href="css/devel.css" rel="stylesheet">
-    
 </head>
 <body>
-    <a href="./"><img class="logo_size" src="logo.png"></a>
+    <a href="."><img class="logo_size" src="logo.png"></a>
     <p class="credits-top">LINE v9.15.0 and WINDOWS LINE v5.19.0.2020 API by <a class="line-link" href="https://github.com/okanon" target="_blank">@okanon</a>.</p>
     <p class="credits-top">framework made by <a class="line-link" href="https://github.com/okanon" target="_blank">@okanon</a> &amp; <a class="line-link" href="https://github.com/54mch4n" target="_blank">@54m</a></p>
-
     <div style="padding-top: 30px;">
-    	<h2 style="margin-bottom: 10px;">Login</h2>
+        <h2 style="margin-bottom: 10px;">Login</h2>
         <ol class="dotted-list" style="padding-bottom: 10px;">
             <li>メールアドレス &amp; パスワード</li>
             <li>メールアドレス &amp; パスワード &amp; ログイン証明</li>
@@ -33,26 +29,25 @@
             <li>authToken（アクセストークン）</li>
         </ol>
         <p class="description">LINEサーバへのログイン方法には上記の4つが存在する。以下のセクションでは、各ログイン方法について解説していく。</p>
-        
         <h3 style="padding-top: 5px; color: #2aa198;">ID &amp; Password</h3>
-        <p class="description">
-            ここでは、idとパスワード、そしてRSA暗号化に必要なデータを、LINEアプリケーションサーバないしはLINEサーバから取得し、それらを使用して暗号キーを生成する。
-            取得されたデータは以下の形式である。<span style="font-size: 11px;"> &ast;LINEアカウントにメールアドレスが紐付けられていることを前提とする</span>
-        </p>
-        
+        <p class="description">ここでは、idとパスワード、そしてRSA暗号化に必要なデータを、LINEアプリケーションサーバないしはLINEサーバから取得し、それらを使用して暗号キーを生成する。 取得されたデータは以下の形式である。 <span style="font-size: 11px;">&ast;LINEアカウントにメールアドレスが紐付けられていることを前提とする</span></p>
         <div style="padding-top: 5px">
             <pre class="language-x hljs">
                 <code class="language-X hljs" data-language="json">{
-  "session_key": "L|Hh73z12LwU",
-  "rsa_key": "8322,940158fcb00e15c7cf0b85a4dc0c3b5789ce809e614ac214178978a82ec62c4d0d07046fbbafc6bfcaedc9c559cf51669d20e0417f463af37e6b9ba22393af15e287e158d79595adab366dfde6e697abc98b8f1756b30f5e00bc1d5e2f8452747fd1e1d962bf6b47e4c796b7ec149c20d4321d22aabdd23d00b62f57f057fa56bbbacb68c5c2bc44c1c569469cad4261dcdd5348d8e3,10001"
+    "session_key": "L|Hh73z12LwU",
+    "rsa_key": "8322,940158fcb00e15c7cf0b85a4dc0c3b5789ce809e614ac214178978a82ec62c4d0d07046fbbafc6bfcaedc9c559cf51669d20e0417f463af37e6b9ba22393af15e287e158d79595adab366dfde6e697abc98b8f1756b30f5e00bc1d5e2f8452747fd1e1d962bf6b47e4c796b7ec149c20d4321d22aabdd23d00b62f57f057fa56bbbacb68c5c2bc44c1c569469cad4261dcdd5348d8e3,10001"
 }</code>
             </pre>
         </div>
         
-        <p class="description">アプリケーションサーバから取得した場合はThriftのデータ形式で値が返るが、ここではLINEサーバへhttpリクエストしたのを前提に後の処理を行う。</p>
-        <p class="description">リクエストの返り値はjson形式であり、session_keyとrsa_keyの2つのデータに分かれる。rsa_keyはコンマで区切られているため、splitして使用する。<br>
+        <p class="description">アプリケーションサーバから取得した場合はThriftのデータ形式で値が返るが、
+            ここではLINEサーバへhttpリクエストしたのを前提に後の処理を行う。</p>
+        <p class="description">リクエストの返り値はjson形式であり、session_keyとrsa_keyの2つのデータに分かれる。
+            rsa_keyはコンマで区切られているため、splitして使用する。<br>
         ここでは順に、keyname、nvalue、evalueとする。</p>
-        <p class="description">session_keyはidとパスワードと一緒に使用し、各値の文字数に対応するアスキーコードを各値の先頭に配置して3つの値を連結し、メッセージを生成する。以下は直感的にわかりやすいpythonコードで記述したものである。</p>
+        <p class="description">session_keyはidとパスワードと一緒に使用し、
+            各値の文字数に対応するアスキーコードを各値の先頭に配置して3つの値を連結し、メッセージを生成する。
+            以下は直感的にわかりやすいpythonコードで記述したものである。</p>
         
         <div style="padding-top: 5px">
             <pre class="language-x hljs">
@@ -62,10 +57,8 @@
             </pre>
         </div>
         
-        <p class="description">nvalueとevalueは16進数形式のため10進数に変換し、PublicKeyを作成。作成したPublicKeyを使用してメッセージを暗号化する。
-            生成された暗号キーは16進数のデータに変換して使用する。ここではcryptoとする。</p>
+        <p class="description">nvalueとevalueは16進数形式のため10進数に変換し、PublicKeyを作成。作成したPublicKeyを使用してメッセージを暗号化する。 生成された暗号キーは16進数のデータに変換して使用する。ここではcryptoとする。</p>
         <p class="description">暗号キーが生成できたら、それを使用してログインを行う。ここで必要になるのは以下の8つである。</p>
-        
         <ol class="dotted-list" style="padding-top: 5px; padding-bottom: 5px;">
             <li>ログインタイプ</li>
             <li>プロバイダ</li>
@@ -78,67 +71,55 @@
         </ol>
         
         <h4>LoginType</h4>
-        <p class="description">ログインタイプを指定する。
+        <p class="description">ログインタイプを指定する。 
             値はline.thriftを用いてThriftのジェネレータで自動生成されたソースコードにEnumデータが存在するためそのデータを使用する。</p>
+        
         <div style="padding-top: 5px">
             <pre class="language-x hljs">
                 <code class="language-X hljs" data-language="thrift"><span style="color: #2aa198">enum</span> LoginType {
-   ID_CREDENTIAL = <span style="color: #859900">0</span>,
-   QRCODE = <span style="color: #859900">1</span>,
-   ID_CREDENTIAL_WITH_E2EE = <span style="color: #859900">2</span>,
+    ID_CREDENTIAL = <span style="color: #859900">0</span>,
+    QRCODE = <span style="color: #859900">1</span>,
+    ID_CREDENTIAL_WITH_E2EE = <span style="color: #859900">2</span>,
 }</code>
             </pre>
         </div>
-        
         <h4>プロバイダ</h4>
-        <p class="description">プロバイダを指定する。この項目はLINEのみなのでどのログインでも値は同じとなる。
-            値はline.thriftを用いてThriftのジェネレータで自動生成されたソースコードにEnumデータが存在するためそのデータを使用する。</p>
+        <p class="description">プロバイダを指定する。この項目はLINEのみなのでどのログインでも値は同じとなる。 値はline.thriftを用いてThriftのジェネレータで自動生成されたソースコードにEnumデータが存在するためそのデータを使用する。</p>
         <div style="padding-top: 5px">
             <pre class="language-x hljs">
                 <code class="language-X hljs" data-language="thrift"><span style="color: #2aa198">enum</span> IdentityProvider {
-   UNKNOWN = <span style="color: #859900">0</span>,
-   LINE = <span style="color: #859900">1</span>,
-   NAVER_KR = <span style="color: #859900">2</span>,
-   LINE_PHONE = <span style="color: #859900">3</span>,
+    UNKNOWN = <span style="color: #859900">0</span>,
+    LINE = <span style="color: #859900">1</span>,
+    NAVER_KR = <span style="color: #859900">2</span>,
+    LINE_PHONE = <span style="color: #859900">3</span>,
 }</code>
             </pre>
         </div>
         
         <h4>識別子</h4>
         <p class="description">上記で生成したkeynameを使用する。</p>
-        
         <h4>パスワード</h4>
         <p class="description">上記で生成したcryptoを使用する。</p>
-        
         <h4>IPアドレス</h4>
-        <p class="description">グローバルIPアドレスを使用する。しかし、この項目は任意のアドレスを記述しても動作に問題はない事が確認されている。
-            本ライブラリではローカル・ループバック・アドレス(127.0.0.1)を使用している。ログインされた場所との関連性は無いと思われる。</p>
-        
+        <p class="description">グローバルIPアドレスを使用する。しかし、この項目は任意のアドレスを記述しても動作に問題はない事が確認されている。 本ライブラリではローカル・ループバック・アドレス(127.0.0.1)を使用している。ログインされた場所との関連性は無いと思われる。</p>
         <h4>ログイン証明</h4>
-        <p class="description">1度目のログインの場合は""(データなし)を指定する。NULLを指定するとLINEサーバから遮断されるため、必ずstring型を使用する。
-            ログイン成功後にcertificateとして値が返るため、2度目以降のログインに使用することでログイン時の4桁のPINコード入力を省略してログインする事が可能になる。</p>
-        
+        <p class="description">1度目のログインの場合は""(データなし)を指定する。NULLを指定するとLINEサーバから遮断されるため、必ずstring型を使用する。 ログイン成功後にcertificateとして値が返るため、2度目以降のログインに使用することでログイン時の4桁のPINコード入力を省略してログインする事が可能になる。</p>
         <h4>e2eeVersion</h4>
-        <p class="description"><a class="line-link" href="https://help.line.me/line/android/pc?lang=ja&contentId=50001520">Letter Sealing</a>
-            (サードパーティログイン時のトーク内容の暗号化)が有効化されている場合にのみ使用する。
-            使用する場合は値に1、しない場合は0を指定する。LineIncはLetter Sealing未対応のため、e2eeVersionには0を指定する。</p>
-        
+        <p class="description"><a class="line-link" href="https://help.line.me/line/android/pc?lang=ja&contentId=50001520">Letter Sealing</a> (サードパーティログイン時のトーク内容の暗号化)が有効化されている場合にのみ使用する。 使用する場合は値に1、しない場合は0を指定する。LineIncはLetter Sealing未対応のため、e2eeVersionには0を指定する。</p>
         <h4>システム名</h4>
-        <p class="description">この項目は任意の文字列を指定する。
-            これはLINEへのログインが成功した際のLINE公式アカウントからのログインメッセージにあるログインした端末の名前、更にログイン中の端末の項目に利用される。</p>
-        
-        <br>
+        <p class="description">この項目は任意の文字列を指定する。 これはLINEへのログインが成功した際のLINE公式アカウントからのログインメッセージにあるログインした端末の名前、更にログイン中の端末の項目に利用される。</p><br>
         <p class="description">では、これらのデータを使用して実際にログインを行なっていく。</p>
+        
         <div style="padding-top: 5px">
             <pre class="language-x hljs">
-                <code class="language-X hljs" data-language="c++">thrift_ptr<<span style="color: #2aa198">TalkServiceClient</span>> conn(<span style="color: #b58900">this</span>->host, 443, <span style="color: #d33682">TALKSERVICE</span>, {{<span style="color: #dc322f">"User-Agent"</span>, <span style="color: #b58900">this</span>->useragent}, {<span style="color: #dc322f">"X-Line-Application"</span>, <span style="color: #b58900">this</span>->application}});
+                <code class="language-X hljs" data-language="c++">thrift_ptr&lt;<span style="color: #2aa198">TalkServiceClient</span>&gt; conn(<span style="color: #b58900">this</span>-&gt;host, 443, <span style="color: #d33682">TALKSERVICE</span>, {{<span style="color: #dc322f">"User-Agent"</span>, <span style="color: #b58900">this</span>-&gt;useragent}, {<span style="color: #dc322f">"X-Line-Application"</span>, <span style="color: #b58900">this</span>-&gt;application}});
 
 <span style="color: #2aa198">RSAKey</span> key;
-conn->getRSAKeyInfo(key, IdentityProvider::<span style="color: #2aa198">LINE</span>);
+conn-&gt;getRSAKeyInfo(key, IdentityProvider::<span style="color: #2aa198">LINE</span>);
 
 <span style="color: #268bd2">auto</span> t = encrypt::<span style="color: #2aa198">rsa</span>(key, mail, password);
 
-thrift_ptr<<span style="color: #2aa198">AuthServiceClient</span>> aconn(<span style="color: #b58900">this</span>->host, 443, <span style="color: #d33682">AUTH</span>, {{<span style="color: #dc322f">"User-Agent"</span>, <span style="color: #b58900">this</span>->useragent}, {<span style="color: #dc322f">"X-Line-Application"</span>, <span style="color: #b58900">this</span>->application}});
+thrift_ptr&lt;<span style="color: #2aa198">AuthServiceClient</span>&gt; aconn(<span style="color: #b58900">this</span>-&gt;host, 443, <span style="color: #d33682">AUTH</span>, {{<span style="color: #dc322f">"User-Agent"</span>, <span style="color: #b58900">this</span>-&gt;useragent}, {<span style="color: #dc322f">"X-Line-Application"</span>, <span style="color: #b58900">this</span>-&gt;application}});
 
 <span style="color: #2aa198">LoginRequest</span> request;
 <span style="color: #2aa198">LoginResult</span> result;
@@ -150,33 +131,33 @@ request.password = t.second;
 request.accessLocation = <span style="color: #dc322f">"127.0.0.1"</span>;
 request.certificate = certificate;
 request.e2eeVersion = <span style="color: #859900">0</span>;
-request.systemName = <span style="color: #b58900">this</span>->systemname;
+request.systemName = <span style="color: #b58900">this</span>-&gt;systemname;
 
 <span style="color: #268bd2">try</span> {
-   	aconn->loginZ(result, request);
+    aconn-&gt;loginZ(result, request);
 }
 <span style="color: #268bd2">catch</span> (<span style="color: #2aa198">AuthException</span> &e) {
-    std::cerr << e << std::endl;
+    std::cerr &lt;&lt; e &lt;&lt; std::endl;
 }
 
 <span style="color: #268bd2">if</span> (result.type == LoginResultType::<span style="color: #2aa198">REQUIRE_DEVICE_CONFIRM</span>) {
-    std::cout << <span style="color: #dc322f">"Enter \""</span> << result.pinCode << <span style="color: #dc322f">"\" on your smartphone :)"</span> << std::endl;
-			
+    std::cout &lt;&lt; <span style="color: #dc322f">"Enter \""</span> &lt;&lt; result.pinCode &lt;&lt; <span style="color: #dc322f">"\" on your smartphone :)"</span> &lt;&lt; std::endl;
+            
     <span style="color: #268bd2">return</span> q(result.verifier);
 }
 <span style="color: #268bd2">else if</span> (result.type == LoginResultType::<span style="color: #2aa198">SUCCESS</span>) {
-    <span style="color: #b58900">this</span>->authToken = result.authToken;
-    <span style="color: #b58900">this</span>->certificate = result.certificate;
+    <span style="color: #b58900">this</span>-&gt;authToken = result.authToken;
+    <span style="color: #b58900">this</span>-&gt;certificate = result.certificate;
 
     ready();
     <span style="color: #268bd2">return</span> true;
 }</code>
             </pre>
-    </div>
+        </div>
         
-	<p class="description">先ほどの8つのデータはLoginRequest変数に格納し、loginZ APIを叩く。
-		この時、参照渡しによって先に定義済みのLoginResult変数にデータが返る。</p>
-	<div style="padding-top: 5px">
+        <p class="description">先ほどの8つのデータはLoginRequest変数に格納し、loginZ APIを叩く。 
+            この時、参照渡しによって先に定義済みのLoginResult変数にデータが返る。</p>
+        <div style="padding-top: 5px">
             <pre class="language-x hljs">
                 <code class="language-X hljs" data-language="thrift"><span style="color: #2aa198">enum</span> LoginResultType {
     SUCCESS = <span style="color: #859900">1</span>,
@@ -200,7 +181,7 @@ request.systemName = <span style="color: #b58900">this</span>->systemname;
     4: <span style="color: #268bd2">string</span> normalizedPhone;
     5: <span style="color: #268bd2">string</span> countryCode;
     6: <span style="color: #268bd2">string</span> nationalSignificantNumber;
-    7: <span style="color: #268bd2">list</span><<span style="color: #6c71c4">VerificationMethod</span>> availableVerificationMethods;
+    7: <span style="color: #268bd2">list</span>&lt;<span style="color: #6c71c4">VerificationMethod</span>&gt; availableVerificationMethods;
     8: <span style="color: #268bd2">string</span> callerIdMask;
 }
 
@@ -215,23 +196,19 @@ request.systemName = <span style="color: #b58900">this</span>->systemname;
     8: <span style="color: #6c71c4">VerificationSessionData</span> sessionForSMSConfirm;
 }</code>
             </pre>
-	    </div>
-		
-        <p class="description">LoginResultが返却されたらまずLoginResultTypeを確認する。
-			これは現在のLoginの状態を示す指標であるため、帰ってくる値によってその後の処理を変えていかなければならない。</p>
-        <p class="description">基本的にこのパターンで帰ってくるのは、REQUIRE_DEVICE_CONFIRMないしはSUCCESSである。
-			REQUIRE_DEVICE_CONFIRMが帰ってきた場合はPINコードを求められるので認証へつなげていく。
-			SUCCESSが帰ってくる場合はLoginResultのauthTokenに値が入るので、ログイン自体が成功したということになる。</p>
+        </div>
+        
+        <p class="description">LoginResultが返却されたらまずLoginResultTypeを確認する。 
+            これは現在のLoginの状態を示す指標であるため、帰ってくる値によってその後の処理を変えていかなければならない。</p>
+        <p class="description">基本的にこのパターンで帰ってくるのは、REQUIRE_DEVICE_CONFIRMないしはSUCCESSである。 
+            REQUIRE_DEVICE_CONFIRMが帰ってきた場合はPINコードを求められるので認証へつなげていく。 
+            SUCCESSが帰ってくる場合はLoginResultのauthTokenに値が入るので、ログイン自体が成功したということになる。</p>
         <p class="description">REQUIRE_DEVICE_CONFIRMの場合の後の処理はQRコードのものと同一な為、後ほど説明することにする。</p>
-
-	
     </div>
-    
     <footer>
-        <p class="warning-message" style="padding-top: 30px;">
-            copyright (c) 2019 okanon.<br>
-            designer: <a class="line-link" href="https://github.com/okanon" target="_blank">@okanon</a>
-        </p>
+        <p class="warning-message" style="padding-top: 30px;">copyright (c) 2019 okanon.<br>
+        designer: <a class="line-link" href="https://github.com/okanon" target="_blank">@okanon</a></p>
     </footer>
 </body>
 </html>
+        
