@@ -64,7 +64,7 @@
         
         <p class="description">nvalueとevalueは16進数形式のため10進数に変換し、PublicKeyを作成。作成したPublicKeyを使用してメッセージを暗号化する。
             生成された暗号キーは16進数のデータに変換して使用する。ここではcryptoとする。</p>
-        <p class="dscription">暗号キーが生成できたら、それを使用してログインを行う。ここで必要になるのは以下の8つである。</p>
+        <p class="description">暗号キーが生成できたら、それを使用してログインを行う。ここで必要になるのは以下の8つである。</p>
         
         <ol class="dotted-list" style="padding-top: 5px; padding-bottom: 5px;">
             <li>ログインタイプ</li>
@@ -131,45 +131,45 @@
         <p class="description">では、これらのデータを使用して実際にログインを行なっていく。</p>
         <div style="padding-top: 5px">
             <pre class="language-x hljs">
-                <code class="language-X hljs" data-language="thrift">thrift_ptr<TalkServiceClient> conn(this->host, 443, TALKSERVICE, {{"User-Agent", this->useragent}, {"X-Line-Application", this->application}});
+                <code class="language-X hljs" data-language="thrift">thrift_ptr<<span style="color: #2aa198">TalkServiceClient</span>> conn(this->host, 443, <span style="color: #d33682">TALKSERVICE</span>, {{"User-Agent", <span style="color: #b58900">this</span>->useragent}, {"X-Line-Application", <span style="color: #b58900">this</span>->application}});
 
-RSAKey key;
-conn->getRSAKeyInfo(key, IdentityProvider::LINE);
+<span style="color: #2aa198">RSAKey</span> key;
+conn->getRSAKeyInfo(key, IdentityProvider::<span style="color: #2aa198">LINE</span>);
 
-auto t = encrypt::rsa(key, mail, password);
+<span style="color: #6c71c4">auto</span> t = encrypt::rsa(key, mail, password);
 
-thrift_ptr<AuthServiceClient> aconn(this->host, 443, AUTH, {{"User-Agent", this->useragent}, {"X-Line-Application", this->application}});
+thrift_ptr<<span style="color: #2aa198">AuthServiceClient</span>> aconn(this->host, 443, <span style="color: #d33682">AUTH</span>, {{"User-Agent", <span style="color: #b58900">this</span>->useragent}, {"X-Line-Application", <span style="color: #b58900">this</span>->application}});
 
-LoginRequest request;
-LoginResult result;
+<span style="color: #2aa198">LoginRequest</span> request;
+<span style="color: #2aa198">LoginResult</span> result;
 
-request.type = LoginType::ID_CREDENTIAL;
-request.identityProvider = IdentityProvider::LINE;
+request.type = LoginType::<span style="color: #2aa198">ID_CREDENTIAL</span>;
+request.identityProvider = IdentityProvider::<span style="color: #2aa198">LINE</span>;
 request.identifier = t.first;
 request.password = t.second;
-request.accessLocation = "127.0.0.1";
+request.accessLocation = <span style="color: #dc322f">"127.0.0.1"</span>;
 request.certificate = certificate;
 request.e2eeVersion = 0;
-request.systemName = this->systemname;
+request.systemName = <span style="color: #b58900">this</span>->systemname;
 
-try {
-	aconn->loginZ(result, request);
+<span style="color: #6c71c4">try</span> {
+   	aconn->loginZ(result, request);
 }
-catch (AuthException &e) {
-	std::cerr << e << std::endl;
+<span style="color: #6c71c4">catch</span> (<span style="color: #2aa198">AuthException</span> &e) {
+    std::cerr << e << std::endl;
 }
 
-if (result.type == LoginResultType::REQUIRE_DEVICE_CONFIRM) {
-	std::cout << "Enter \"" << result.pinCode << "\" on your smartphone :)" << std::endl;
+<span style="color: #6c71c4">if</span> (result.type == LoginResultType::<span style="color: #2aa198">REQUIRE_DEVICE_CONFIRM</span>) {
+    std::cout << <span style="color: #dc322f">"Enter \""</span> << result.pinCode << <span style="color: #dc322f">"\" on your smartphone :)"</span> << std::endl;
 			
-	return q(result.verifier);
+    <span style="color: #6c71c4">return</span> q(result.verifier);
 }
-else if (result.type == LoginResultType::SUCCESS) {
-	this->authToken = result.authToken;
-	this->certificate = result.certificate;
+<span style="color: #6c71c4">else if</span> (result.type == LoginResultType::<span style="color: #2aa198">SUCCESS</span>) {
+    <span style="color: #b58900">this</span>->authToken = result.authToken;
+    <span style="color: #b58900">this</span>->certificate = result.certificate;
 
-	ready();
-	return true;
+    ready();
+    <span style="color: #6c71c4">return</span> true;
 }</code>
             </pre>
         </div>
