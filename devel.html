@@ -131,14 +131,14 @@
         <p class="description">では、これらのデータを使用して実際にログインを行なっていく。</p>
         <div style="padding-top: 5px">
             <pre class="language-x hljs">
-                <code class="language-X hljs" data-language="c++">thrift_ptr<<span style="color: #2aa198">TalkServiceClient</span>> conn(this->host, 443, <span style="color: #d33682">TALKSERVICE</span>, {{"User-Agent", <span style="color: #b58900">this</span>->useragent}, {"X-Line-Application", <span style="color: #b58900">this</span>->application}});
+                <code class="language-X hljs" data-language="c++">thrift_ptr<<span style="color: #2aa198">TalkServiceClient</span>> conn(<span style="color: #b58900">this</span>->host, 443, <span style="color: #d33682">TALKSERVICE</span>, {{<span style="color: #dc322f">"User-Agent"</span>, <span style="color: #b58900">this</span>->useragent}, {<span style="color: #dc322f">"X-Line-Application"</span>, <span style="color: #b58900">this</span>->application}});
 
 <span style="color: #2aa198">RSAKey</span> key;
 conn->getRSAKeyInfo(key, IdentityProvider::<span style="color: #2aa198">LINE</span>);
 
-<span style="color: #6c71c4">auto</span> t = encrypt::rsa(key, mail, password);
+<span style="color: #6c71c4">auto</span> t = encrypt::<span style="color: #2aa198">rsa</span>(key, mail, password);
 
-thrift_ptr<<span style="color: #2aa198">AuthServiceClient</span>> aconn(this->host, 443, <span style="color: #d33682">AUTH</span>, {{"User-Agent", <span style="color: #b58900">this</span>->useragent}, {"X-Line-Application", <span style="color: #b58900">this</span>->application}});
+thrift_ptr<<span style="color: #2aa198">AuthServiceClient</span>> aconn(<span style="color: #b58900">this</span>->host, 443, <span style="color: #d33682">AUTH</span>, {{<span style="color: #dc322f">"User-Agent"</span>, <span style="color: #b58900">this</span>->useragent}, {<span style="color: #dc322f">"X-Line-Application"</span>, <span style="color: #b58900">this</span>->application}});
 
 <span style="color: #2aa198">LoginRequest</span> request;
 <span style="color: #2aa198">LoginResult</span> result;
@@ -149,7 +149,7 @@ request.identifier = t.first;
 request.password = t.second;
 request.accessLocation = <span style="color: #dc322f">"127.0.0.1"</span>;
 request.certificate = certificate;
-request.e2eeVersion = 0;
+request.e2eeVersion = <span style="color: #859900">0</span>;
 request.systemName = <span style="color: #b58900">this</span>->systemname;
 
 <span style="color: #6c71c4">try</span> {
@@ -184,4 +184,3 @@ request.systemName = <span style="color: #b58900">this</span>->systemname;
     </footer>
 </body>
 </html>
-
