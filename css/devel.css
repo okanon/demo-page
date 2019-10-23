@@ -29,6 +29,11 @@ pre.language-x {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    
+    @media (max-width: 600px) {
+        max-width: 99%;
+    }
+}
 }
 
 pre code {
