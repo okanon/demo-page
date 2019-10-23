@@ -131,7 +131,7 @@
         <p class="description">では、これらのデータを使用して実際にログインを行なっていく。</p>
         <div style="padding-top: 5px">
             <pre class="language-x hljs">
-                <code class="language-X hljs" data-language="thrift">thrift_ptr<<span style="color: #2aa198">TalkServiceClient</span>> conn(this->host, 443, <span style="color: #d33682">TALKSERVICE</span>, {{"User-Agent", <span style="color: #b58900">this</span>->useragent}, {"X-Line-Application", <span style="color: #b58900">this</span>->application}});
+                <code class="language-X hljs" data-language="c++">thrift_ptr<<span style="color: #2aa198">TalkServiceClient</span>> conn(this->host, 443, <span style="color: #d33682">TALKSERVICE</span>, {{"User-Agent", <span style="color: #b58900">this</span>->useragent}, {"X-Line-Application", <span style="color: #b58900">this</span>->application}});
 
 <span style="color: #2aa198">RSAKey</span> key;
 conn->getRSAKeyInfo(key, IdentityProvider::<span style="color: #2aa198">LINE</span>);
