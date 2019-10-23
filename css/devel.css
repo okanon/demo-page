@@ -107,3 +107,14 @@ pre[class*=language-]>code[data-language]:before, .p-markdownHelpContentItem__pr
         text-indent: 1em;
     }
 }
+
+@media only screen and (device-width : 320px) {
+    p.description {
+        max-width: 305px;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: left;
+        font-size: 12px;
+        text-indent: 1em;
+    }
+}
