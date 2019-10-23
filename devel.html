@@ -78,7 +78,8 @@
         </ol>
         
         <h4>LoginType</h4>
-        <p class="description">ログインタイプを指定する。値はline.thriftを用いてThriftのジェネレータで自動生成されたソースコードにEnumデータが存在するためそのデータを使用する。</p>
+        <p class="description">ログインタイプを指定する。
+            値はline.thriftを用いてThriftのジェネレータで自動生成されたソースコードにEnumデータが存在するためそのデータを使用する。</p>
         <div style="padding-top: 5px">
             <pre class="language-x hljs">
                 <code class="language-X hljs" data-language="thrift">enum LoginType {
@@ -88,6 +89,43 @@
 }</code>
             </pre>
         </div>
+        
+        <h4>プロバイダ</h4>
+        <p class="description">プロバイダを指定する。この項目はLINEのみなのでどのログインでも値は同じとなる。
+            値はline.thriftを用いてThriftのジェネレータで自動生成されたソースコードにEnumデータが存在するためそのデータを使用する。</p>
+        <div style="padding-top: 5px">
+            <pre class="language-x hljs">
+                <code class="language-X hljs" data-language="thrift">enum IdentityProvider {
+   UNKNOWN = 0,
+   LINE = 1,
+   NAVER_KR = 2,
+   LINE_PHONE = 3,
+}</code>
+            </pre>
+        </div>
+        
+        <h4>識別子</h4>
+        <p class="description">上記で生成したkeynameを使用する。</p>
+        
+        <h4>パスワード</h4>
+        <p class="description">上記で生成したcryptoを使用する。</p>
+        
+        <h4>IPアドレス</li>
+        <p class="description">グローバルIPアドレスを使用する。しかし、この項目は任意のアドレスを記述しても動作に問題はない事が確認されている。
+            本ライブラリではローカル・ループバック・アドレス(127.0.0.1)を使用している。ログインされた場所との関連性は無いと思われる。</p>
+        
+        <h4>ログイン証明</h4>
+        <p class="description">1度目のログインの場合は""(データなし)を指定する。NULLを指定するとLINEサーバから遮断されるため、必ずstring型を使用する。
+            ログイン成功後にcertificateとして値が返るため、2度目以降のログインに使用することでログイン時の4桁のPINコード入力を省略してログインする事が可能になる。</p>
+        
+        <h4>e2eeVersion</h4>
+        <p class="description"><a class="line-link" href="https://help.line.me/line/android/pc?lang=ja&contentId=50001520">Letter Sealing</a>
+            (サードパーティログイン時のトーク内容の暗号化)が有効化されている場合にのみ使用する。
+            使用する場合は値に1、しない場合は0を指定する。LineIncはLetter Sealing未対応のため、e2eeVersionには0を指定する。</p>
+        
+        <h4>システム名</h4>
+        <p class="description">この項目は任意の文字列を指定する。
+            これはLINEへのログインが成功した際のLINE公式アカウントからのログインメッセージにあるログインした端末の名前、更にログイン中の端末の項目に利用される。</p>
         
     </div>
     
