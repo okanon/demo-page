@@ -172,7 +172,7 @@ request.systemName = <span style="color: #b58900">this</span>->systemname;
     <span style="color: #268bd2">return</span> true;
 }</code>
             </pre>
-        </div>
+    </div>
         
 	<p class="description">先ほどの8つのデータはLoginRequest変数に格納し、loginZ APIを叩く。
 		この時、参照渡しによって先に定義済みのLoginResult変数にデータが返る。</p>
@@ -214,15 +214,15 @@ request.systemName = <span style="color: #b58900">this</span>->systemname;
     7: <span style="color: #268bd2">string</span> displayMessage;
     8: <span style="color: #6c71c4">VerificationSessionData</span> sessionForSMSConfirm;
 }</code>
-        </pre>
-	</div>
+            </pre>
+	    </div>
 		
-    <p class="description">LoginResultが返却されたらまずLoginResultTypeを確認する。
-		これは現在のLoginの状態を示す指標であるため、帰ってくる値によってその後の処理を変えていかなければならない。</p>
-    <p class="description">基本的にこのパターンで帰ってくるのは、REQUIRE_DEVICE_CONFIRMないしはSUCCESSである。
-		REQUIRE_DEVICE_CONFIRMが帰ってきた場合はPINコードを求められるので認証へつなげていく。
-		SUCCESSが帰ってくる場合はLoginResultのauthTokenに値が入るので、ログイン自体が成功したということになる。</p>
-    <p class="description">REQUIRE_DEVICE_CONFIRMの場合の後の処理はQRコードのものと同一な為、後ほど説明することにする。</p>
+        <p class="description">LoginResultが返却されたらまずLoginResultTypeを確認する。
+			これは現在のLoginの状態を示す指標であるため、帰ってくる値によってその後の処理を変えていかなければならない。</p>
+        <p class="description">基本的にこのパターンで帰ってくるのは、REQUIRE_DEVICE_CONFIRMないしはSUCCESSである。
+			REQUIRE_DEVICE_CONFIRMが帰ってきた場合はPINコードを求められるので認証へつなげていく。
+			SUCCESSが帰ってくる場合はLoginResultのauthTokenに値が入るので、ログイン自体が成功したということになる。</p>
+        <p class="description">REQUIRE_DEVICE_CONFIRMの場合の後の処理はQRコードのものと同一な為、後ほど説明することにする。</p>
 
 	
     </div>
