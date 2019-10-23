@@ -174,6 +174,51 @@ request.systemName = <span style="color: #b58900">this</span>->systemname;
             </pre>
         </div>
         
+	<p class="description">先ほどの8つのデータはLoginRequest変数に格納し、loginZ APIを叩く。
+		この時、参照渡しによって先に定義済みのLoginResult変数にデータが返る。</p>
+	<div style="padding-top: 5px">
+            <pre class="language-x hljs">
+                <code class="language-X hljs" data-language="thrift"><span style="color: #2aa198">enum</span> LoginResultType {
+    SUCCESS = <span style="color: #859900">1</span>,
+    REQUIRE_QRCODE = <span style="color: #859900">2</span>,
+    REQUIRE_DEVICE_CONFIRM = <span style="color: #859900">3</span>,
+    REQUIRE_SMS_CONFIRM = <span style="color: #859900">4</span>,
+}
+
+<span style="color: #2aa198">enum</span> VerificationMethod {
+    NO_AVAILABLE = <span style="color: #859900">0</span>,
+    PIN_VIA_SMS = <span style="color: #859900">1</span>,
+    CALLERID_INDIGO = <span style="color: #859900">2</span>,
+    PIN_VIA_TTS = <span style="color: #859900">4</span>,
+    SKIP = <span style="color: #859900">10</span>,
+}
+
+<span style="color: #2aa198">struct</span> VerificationSessionData {
+    1: <span style="color: #6c71c4">string</span> sessionId;
+    2: <span style="color: #268bd2">VerificationMethod</span> method;
+    3: <span style="color: #6c71c4">string</span> callback;
+    4: <span style="color: #6c71c4">string</span> normalizedPhone;
+    5: <span style="color: #6c71c4">string</span> countryCode;
+    6: <span style="color: #6c71c4">string</span> nationalSignificantNumber;
+    7: <span style="color: #6c71c4">list</span><<span style="color: #268bd2">VerificationMethod</span>> availableVerificationMethods;
+    8: <span style="color: #6c71c4">string</span> callerIdMask;
+}
+
+<span style="color: #2aa198">struct</span> LoginResult {
+    1: <span style="color: #6c71c4">string</span> authToken;
+    2: <span style="color: #6c71c4">string</span> certificate;
+    3: <span style="color: #6c71c4">string</span> verifier;
+    4: <span style="color: #6c71c4">string</span> pinCode;
+    5: <span style="color: #268bd2">LoginResultType</span> type;
+    6: <span style="color: #6c71c4">i64</span> lastPrimaryBindTime;
+    7: <span style="color: #6c71c4">string</span> displayMessage;
+    8: VerificationSessionData sessionForSMSConfirm;
+}
+
+</code>
+            </pre>
+        </div>
+	
     </div>
     
     <footer>
